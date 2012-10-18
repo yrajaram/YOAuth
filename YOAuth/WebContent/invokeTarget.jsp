@@ -1,4 +1,6 @@
 <%@page import="com.herakles.api.client.oauth2.draft25.grant.TokenManager"%>
+<%@page import="com.herakles.api.client.oauth2.draft25.grant.AuthorizationCode"%>
+<%@page import="com.herakles.api.client.oauth2.draft25.grant.Implicit"%>
 <%@page import="com.herakles.api.client.oauth2.draft25.grant.TokenManagerHelper"%>
 <%@page import="com.herakles.api.client.oauth2.draft25.OAuthProperties"%>
 <%@page import="java.util.*,java.sql.*,com.herakles.api.client.ClientHelper"%>
@@ -104,19 +106,20 @@ private static final Logger log = LogManager.getLogger("invokeTarget_jsp.class")
 </tr>
 <tr>
 <%
-// Do not remove the following from this JSP
 log.debug("Value of Grant Type in form (form.getGrantType()):"+form.getGrantType()+" and TokenManager.KeyStore.get():"+TokenManagerHelper.get());
 
-	if (ClientHelper.AUTH_CODE_GT.equalsIgnoreCase(form.getGrantType())
+// Do not remove the following from this JSP
+	if (TokenManager.getCurrentGrantType() instanceof AuthorizationCode 
 			&& (TokenManagerHelper.get() == null)) {
 		String newLoc = OAuthProperties.getAuthURL()+"?response_type=code&client_id="+form.getClientId()+"&state=authCode&redirect_uri="+OAuthProperties.getRedirectURL()+"&scope=Read%20Write";
 		response.setHeader("Refresh", "0;url="+newLoc);
 
-	} else if (ClientHelper.IMPLICIT_GT.equalsIgnoreCase(form.getGrantType())
+	} else if ( TokenManager.getCurrentGrantType() instanceof Implicit 
 			&& (TokenManagerHelper.get() == null)) {
 		String newLoc = OAuthProperties.getAuthURL()+"?response_type=token&client_id="+form.getClientId()+"&state=accessCode&redirect_uri="+OAuthProperties.getRedirectURL()+"&scope=Read%20Write";
 		response.setHeader("Refresh", "0;url="+newLoc);
 	}
+// Do not remove the above till here from this JSP
 
 	java.util.Date date = new java.util.Date();
 %>
