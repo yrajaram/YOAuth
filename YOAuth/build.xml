@@ -1,0 +1,51 @@
+<project name="YOAuth" default="build-jar" basedir=".">
+
+	<property file="build.properties" />
+	
+	<property name="appid" value="yoauth"/>
+
+	<property name="temp" value="${temp.value}"/>
+	
+	<property name="basedir" value="." />
+	
+	<property name="src.dir" value="${src.dir.path.value}" />
+	<property name="src.java.dir" value="${src.java.dir.path.value}" />
+	<property name="webinf.dir" value="${webinf.dir.path.value}" />
+	<property name="meta-inf.dir" value="${meta-inf.dir.path.value}" />
+	<property name="lib.dir" value="${lib.dir.path.value}" />
+	<property name="webinf.classes" value="${webinf.classes.path.value}" />
+	<property name="classes.dir" value="${classes.dir.path.value}" />
+	
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+<target name="clean" description="deletes *.ear, *.war, Webcontent/services/*, Webcontent/classes/* files">
+	<echo message="cleaning the structure.."/>
+	<delete>
+		<fileset dir="${basedir}" includes="${appid}.jar"/>
+	</delete>
+	
+	<delete dir="${classes.dir}/com"/>
+	
+	<mkdir dir="${classes.dir}" />
+</target>
+
+<target name="compile" depends="clean">
+		<javac srcdir="${src.java.dir}" destdir="${classes.dir}" debug="on" deprecation="on" optimize="on">
+			<include name="**/*.java"/>
+			<classpath refid="classpath"/>
+		</javac>
+</target>
+
+<target name="build-jar" depends="compile" description="Creates the jar file">
+	
+	<echo message="Generating the ${appid}.jar ....."/>
+	<jar destfile="${appid}.jar" basedir="${basedir}" level="9">
+		<zipgroupfileset dir="${lib.dir}" includes="*.jar"/>
+	</jar>
+</target>	
+
+</project>
