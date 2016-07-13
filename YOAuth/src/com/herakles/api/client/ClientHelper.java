@@ -52,8 +52,6 @@ public class ClientHelper {
 	public static final String RESORCE_OWNER_GT = "ResorceOwner";
 	public static final String CLIENT_CRED_GT = "ClientCred";
 	private static final ResourceBundle PROPS = ResourceBundle.getBundle("yoauth");
-	//private static final String ClientIdValue = "cktf89dyhsf7n5rb29agk4g7"; // Original - will work only for CC
-	//private static final String ClientSecretValue = "uxc3tf9pbUw5Pb52KQxPrKXv"; //Original - will work only for CC
 	private String ClientIdValue =	PROPS.getString("client.id");
 	private String ClientSecretValue = PROPS.getString("client.secret");
 	private String UserIdValue = PROPS.getString("resource.owner.username");
