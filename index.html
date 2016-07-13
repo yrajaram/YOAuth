@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Yoauth by yrajaram</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Yoauth</h1>
+          <h2>The best and simplest OAuth2.0 client library</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/yrajaram/YOAuth/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/yrajaram/YOAuth/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/yrajaram/YOAuth" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a id="yoauth" class="anchor" href="#yoauth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>YOAuth</h1>
+
+<p>The best and simplest OAuth2.0 client library</p>
+
+<p>This particular implementation is targetted for Java/JSP based projects. Token fetching has been abstracted to be totally transparent for developers. All grant types are supported. </p>
+
+<h2>
+<a id="how-to-use-this" class="anchor" href="#how-to-use-this" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use this?</h2>
+
+<ul>
+<li>The entire implementation is available under YOAuth folder under GIT home; so copy and use that folder as a starter JSP based project and deploy it on your Application Container, and then access the index.html page. That would fetch the token using the particular grant type you have set in index.html.</li>
+<li>If however you want to use this in a Java Application, just take the Main.java (under src/com/herakles/api/client folder) and run it - modify it to use the grant type you want. </li>
+</ul>
+
+<h2>
+<a id="apis-available-in-oyauth" class="anchor" href="#apis-available-in-oyauth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>APIs available in OYAuth</h2>
+
+<p>Invoking the following will always fetch a valid access token based on the appropriate Grant Type:</p>
+
+<pre><code>TokenManager.KeyStore.getAccessToken();
+</code></pre>
+
+<p>After invoking this API the calling application can use the access token returned to invoke the target service (your API implementation).  </p>
+
+<h3>
+<a id="this-section-shows-how-a-calling-application-can-invoke-the-target-service-using-yoauth" class="anchor" href="#this-section-shows-how-a-calling-application-can-invoke-the-target-service-using-yoauth" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>This section shows how a calling application can invoke the target service using YOAuth.</h3>
+
+<ul>
+<li>Initialize the Token manager by setting all required URLs and properties in oauth2lite.properties and place it in classpath.  (See next section for info on the contents of <code>oauth2lite.properties</code>)</li>
+<li>Then make sure the required grant type is set by using values defined for GrantTypes:</li>
+</ul>
+
+<pre><code>TokenManager.KeyStore.setGrantType(grantType);
+</code></pre>
+
+<ul>
+<li>Then invoke the only API exposed in OAuth to get access token and then use the returned access token invoke the target service (API implementation)</li>
+</ul>
+
+<pre><code>// ------------Get Access Token based on Grant Type
+String accessToken = TokenManager.KeyStore.getAccessToken();
+if (accessToken!= null) {
+  // ------------Invoke your API
+            yourImpementationToInvokeTargetService(accessToken);
+}
+</code></pre>
+
+<h2>
+<a id="how-to-set-the-authorization-and-token-urls" class="anchor" href="#how-to-set-the-authorization-and-token-urls" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to set the authorization and token URLs:</h2>
+
+<p>To initialize the TokenManager place a properties file in your classpath. It should be named oauth2lite.properties  and should have the following properties initialized in it - the values provided below are for illustration onl, you need to configure with correct values that would work for your needs.</p>
+
+<pre><code>// provide only one grant type here or set programatically
+grant.type=Implicit/AuthCode/ResourceOwner/ClientCred
+client.id=your-client-id
+client.secret=your-client-secret
+resource.owner.username=your-ro-username
+resource.owner.password=your-ro-password
+authorization.url=https://localhost:7777/authorization.oauth2
+token.url=https://localhost:7778/token.oauth2
+redirect.url= http://127.0.0.1
+</code></pre>
+
+<h3>
+<a id="handling-the-redirect-uri" class="anchor" href="#handling-the-redirect-uri" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Handling the Redirect URI:</h3>
+
+<p>The YOAoth framework comes bundled with a JSP page (<code>callback.jsp</code>) to handle the redirect URI.  Please make sure to configure this to match with your client’s redirect URI. 
+For example if for your client if your redirect uri is http://localhost:8080/OAuth/callback.jsp then make sure that callback.jsp is placed under the Webcontents of your application (which should be OAuth to match with the redirect uri in this case).</p>
+
+<p>Try it out and let me know if you need any improvements. </p>
+        </section>
+
+        <footer>
+          Yoauth is maintained by <a href="https://github.com/yrajaram">yrajaram</a><br>
+          This page was generated by <a href="https://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
