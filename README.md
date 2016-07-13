@@ -15,14 +15,11 @@ TokenManager.KeyStore.getAccessToken();
 ```
 After invoking this API the calling application can use the access token returned to invoke the target service (your API implementation).  
 The following code snippet shows how a calling application can invoke the target service using YOAuth.
+
 1. Initialize the Token manager using the following approach:
-
 Set all required URLs and properties in oauth2lite.properties and place it in classpath.  (See next section for info on the contents of `oauth2lite.properties`)
-
 2. Then make sure the required grant type is set by using values defined for GrantTypes:
-```
-TokenManager.KeyStore.setGrantType(grantType);
-```
+`TokenManager.KeyStore.setGrantType(grantType);`
 3. Then invoke the only API exposed in OAuth to get access token and then use the returned access token invoke the target service (API implementation)
 ```
 // ------------Get Access Token based on Grant Type
