@@ -44,7 +44,7 @@ token.url=https://localhost:7778/token.oauth2
 redirect.url= http://127.0.0.1
 ```
 
-##Handling the Redirect URI:
+###Handling the Redirect URI:
 The YOAoth framework comes bundled with a JSP page (`callback.jsp`) to handle the redirect URI.  Please make sure to configure this to match with your client’s redirect URI. 
 For example if for your client if your redirect uri is http://localhost:8080/OAuth/callback.jsp then make sure that callback.jsp is placed under the Webcontents of your application (which should be OAuth to match with the redirect uri in this case).
 
