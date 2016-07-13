@@ -10,9 +10,10 @@ This particular implementation is targetted for Java/JSP based projects. Token f
 
 ##Here are the steps to follow in general:
 1. Initialize the Token manager by setting all required properties and URLs in oauth2lite.properties and place it in classpath.
-2. Then make sure the required grant type is set in TokenManager
-		GrantType gt = new ClientCredentials(); // or		gt = new ResourceOwnerCredentials();
-		TokenManager.setCurrentGrantType(gt);
+2. Then make sure the required grant type is set in TokenManager; like 
+<code>	GrantType gt = new ClientCredentials(); // or		gt = new ResourceOwnerCredentials();
+	TokenManager.setCurrentGrantType(gt);
+</code>
 3. Then invoke the only API exposed in YOAuth to get access token for the set Grant Type
 
 Try it out and let me know if you need any improvements. 
